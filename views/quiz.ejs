@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викторина-чат (без чата)</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script defer src="/client.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="game-area">
+            <div id="game-status">Введите имя, чтобы начать</div>
+            <div id="question-area" style="display: none;">
+                <h2 id="question-text"></h2>
+                <div id="options"></div>
+                <p id="feedback"></p>
+            </div>
+            <div id="scoreboard">
+                <h3>Таблица лидеров</h3>
+                <ul id="players-list"></ul>
+            </div>
+            <button id="new-game-btn" style="display: none; margin-top: 20px;">🔄 Новая игра</button>
+        </div>
+    </div>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>Введите ваше имя</h2>
+            <input type="text" id="username" placeholder="Имя">
+            <button id="join-btn">Войти</button>
+            <p id="error-msg" style="color:red"></p>
+        </div>
+    </div>
+</body>
+</html>

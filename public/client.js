@@ -1,6 +1,5 @@
 const socket = io();
 
-// DOM элементы
 const modal = document.getElementById('login-modal');
 const joinBtn = document.getElementById('join-btn');
 const usernameInput = document.getElementById('username');
@@ -16,7 +15,6 @@ const newGameBtn = document.getElementById('new-game-btn');
 
 let currentUserName = null;
 
-// ---------- Вход ----------
 joinBtn.onclick = () => {
   const name = usernameInput.value.trim();
   if (!name) {
@@ -34,12 +32,10 @@ joinBtn.onclick = () => {
   });
 };
 
-// ---------- Новая игра ----------
 newGameBtn.onclick = () => {
   socket.emit('new_game');
 };
 
-// ---------- События Socket.IO ----------
 socket.on('new_question', (data) => {
   gameStatus.textContent = `Вопрос ${data.questionNumber} из ${data.total}`;
   questionArea.style.display = 'block';
@@ -88,7 +84,6 @@ socket.on('game_over', ({ winner, finalScores }) => {
   gameStatus.textContent = `🏆 Игра окончена! Победитель: ${winner}`;
   questionArea.style.display = 'none';
   newGameBtn.style.display = 'block';
-  // Показываем финальные результаты в алерте
   let finalMsg = 'Финальные результаты:\n';
   for (let id in finalScores) {
     finalMsg += `${finalScores[id].name}: ${finalScores[id].score}\n`;
@@ -96,7 +91,6 @@ socket.on('game_over', ({ winner, finalScores }) => {
   alert(finalMsg);
 });
 
-// Обновление игры после нажатия "Новая игра"
 socket.on('game_reset', () => {
   gameStatus.textContent = 'Игра перезапущена! Новый раунд.';
   questionArea.style.display = 'block';
